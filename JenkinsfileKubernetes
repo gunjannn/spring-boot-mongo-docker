@@ -27,7 +27,7 @@ node{
      
      stage("Deploy To Kuberates Cluster"){
         kubernetesDeploy(
-         configs: 'springBootMongoNew.yml', 
+         configs: 'springBootMongo.yml', 
          kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
          enableConfigSubstitution: true
         )
@@ -36,7 +36,7 @@ node{
 	  /**
       stage("Deploy To Kuberates Cluster"){
         sh 'kubectl delete rc spring-controller mongo-controller'
-        sh 'kubectl apply -f springBootMongoNew.yml'
+        sh 'kubectl apply -f springBootMongo.yml'
       } **/
      
 }
