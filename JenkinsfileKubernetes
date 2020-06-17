@@ -30,7 +30,7 @@ node{
        configFilePaths: '/home/gunjan/.kube', 
        containerService: 'k8s-bg | AKS', 
        dcosDockerCredentialsPath: '', 
-       resourceGroupName: 'vm-rg', "
+       resourceGroupName: 'vm-rg',
        secretName: '', 
        sshCredentialsId: 'aks'
      }
