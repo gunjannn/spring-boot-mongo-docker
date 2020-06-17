@@ -26,16 +26,17 @@ node{
      
      
      stage("Deploy To AKS"){
-       acsDeploy azureCredentialsId: 'k8s-bg', 
-       configFilePaths: '/home/gunjan/.kube', 
-       containerService: 'k8s-bg | AKS', 
-       dcosDockerCredentialsPath: '', 
-       resourceGroupName: 'vm-rg',
-       secretName: '', 
-       sshCredentialsId: 'aks'
-     }
-	 
-	  /**
+acsDeploy azureCredentialsId: 'k8s-bg', 
+configFilePaths: '/home/gunjan/.kube', 
+containerRegistryCredentials: [[credentialsId: 'Dockergunn', url: 'https://hub.docker.com/repository/docker/dockergunn']], 
+containerService: 'k8s-bg | AKS', 
+dcosDockerCredentialsPath: '', 
+resourceGroupName: 'vm-rg', 
+secretName: '', sshCredentialsId: ''
+
+
+}
+ 	  /**
       stage("Deploy To AKS"){
         sh 'kubectl delete rc spring-controller mongo-controller'
         sh 'kubectl apply -f springBootMongo.yml'
