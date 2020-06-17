@@ -27,7 +27,7 @@ node{
      
      stage("Deploy To AKS"){
 acsDeploy azureCredentialsId: 'k8s-bg', 
-configFilePaths: '/home/gunjan/.kube', 
+configFilePaths: '**/*.war', 
 containerRegistryCredentials: [[credentialsId: 'Dockergunn', url: 'https://hub.docker.com/repository/docker/dockergunn']], 
 containerService: 'k8s-bg | AKS', 
 dcosDockerCredentialsPath: '', 
