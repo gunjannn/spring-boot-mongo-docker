@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: springboot
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: springboot
+        version: green
+    spec:
+      containers:
+      - image: dockergunn/spring-boot-mongo
+        name: springboot
+        ports:
+        - name: springboot
+          containerPort: 8080
