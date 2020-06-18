@@ -1,0 +1,48 @@
+node{
+     
+    stage('SCM Checkout'){
+        git url:  'https://github.com/gunjannn/spring-boot-mongo-docker.git',branch: 'master'
+    }
+    
+    stage(" Maven Clean Package"){
+  //    def mavenHome = tool name: "localmaven", type: "maven"
+  //    def mavenCMD = "${mavenHome}/bin/mvn"
+      sh "mvn clean package"
+      
+    } 
+    
+    
+    stage('Build Docker Image'){
+        sh 'docker rmi -f dockergunn/spring-boot-mongo'
+        sh 'docker build -t dockergunn/spring-boot-mongo .'
+    }
+    
+    stage('Push Docker Image'){
+        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
+          sh "docker login -u dockergunn -p ${DOKCER_HUB_PASSWORD}"
+        }
+        sh 'docker push dockergunn/spring-boot-mongo'
+     }
+     
+     
+     stage("Deploy To AKS"){
+acsDeploy azureCredentialsId: 'k8s-bg', 
+configFilePaths: 'springBootMongo.yml', 
+containerRegistryCredentials: [[credentialsId: 'Dockergunn', url: 'https://hub.docker.com/repository/docker/dockergunn']], 
+containerService: 'k8s-bg | AKS', 
+dcosDockerCredentialsPath: '', 
+resourceGroupName: 'vm-rg', 
+secretName: '', sshCredentialsId: ''
+
+
+}
+ 
+      stage("Deploy To AKS"){
+        sh 'kubectl apply -f spring-boot-Mongo-blue.yml'
+		sh 'kubectl apply -f spring-boot-Mongo-green.yml'
+		sh 'kubectl apply -f spring-boot-Mongo-service.yml'
+      } 
+     
+}
+
+
