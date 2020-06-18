@@ -27,7 +27,7 @@ node{
      
      stage("Deploy To AKS"){
 acsDeploy azureCredentialsId: 'k8s-bg', 
-configFilePaths: 'springBootMongo.yml', 
+configFilePaths: [['spring-boot-Mongo-blue.yml', 'spring-boot-Mongo-green.yml','spring-boot-Mongo-service.yml']],
 containerRegistryCredentials: [[credentialsId: 'Dockergunn', url: 'https://hub.docker.com/repository/docker/dockergunn']], 
 containerService: 'k8s-bg | AKS', 
 dcosDockerCredentialsPath: '', 
