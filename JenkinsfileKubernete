@@ -42,7 +42,14 @@ secretName: '', sshCredentialsId: ''
 		sh 'kubectl apply -f spring-boot-Mongo-green.yml'
 		sh 'kubectl apply -f spring-boot-Mongo-service.yml'
       } 
-     
+    stage('ignore error') {
+    steps {
+        catchError {
+            build job: 'system-check-flow'
+        }
+        echo currentBuild.result
+    }
+} 
 }
 
 
