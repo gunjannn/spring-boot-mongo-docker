@@ -14,7 +14,7 @@ spec:
         version: green
     spec:
       containers:
-      - image: dockergunn/nginx:1.11
+      - image: dockergunn/spring-boot-mongo
         name: springboot
         ports:
         - name: springboot
