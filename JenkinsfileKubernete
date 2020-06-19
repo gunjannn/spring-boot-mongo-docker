@@ -24,7 +24,9 @@ node{
         sh 'docker push dockergunn/spring-boot-mongo'
      }
      
-     
+def servicePrincipalId = '3461446c-1154-4720-95f3-6c1309af3507'
+def resourceGroup = 'vm-rg'
+def aks = 'k8s-bg'
      stage("Deploy To AKS"){
 acsDeploy azureCredentialsId: 'k8s-bg', 
 configFilePaths: 'spring-boot-Mongo-blue.yml, spring-boot-Mongo-green.yml, spring-boot-Mongo-service.yml',
