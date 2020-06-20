@@ -14,7 +14,7 @@ spec:
         version: blue
     spec:
       containers:
-      - image: dockergunn/spring-boot-Mongo
+      - image: dockergunn/myapp:v1
         name: springboot
         ports:
         - name: springboot
